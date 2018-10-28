@@ -1,7 +1,7 @@
-from flask import make_response, render_template, redirect, url_for, session, flash
+from flask import flash, make_response, redirect, render_template, session, url_for
 
 from src import app
-from form import UsernameForm
+from src.form import UsernameForm
 
 
 @app.route('/hello')
