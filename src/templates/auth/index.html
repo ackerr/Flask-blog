@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block title %}
-    {% if user %}
-    {{ user.name }}
-    {% else %}
     Welcome
-    {% endif %}
 {% endblock %}
 
 {% block page_content %}
     <div class="page-header">
-    <h1>this is the index!</h1>
+    <h1>Hello, {% if name %}{{ name }}{% else %}ZmJ{% endif %}</h1>
     </div>
-    <h2>{{ user.name}}</h2>
+    {{ wtf.quick_form(form) }}
 {% endblock %}

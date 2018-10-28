@@ -1,6 +1,7 @@
-from flask import make_response, render_template
+from flask import make_response, render_template, redirect, url_for, session, flash
 
 from src import app
+from form import UsernameForm
 
 
 @app.route('/hello')
@@ -11,11 +12,17 @@ def hello():
     return response
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
-    user = {'name': 'ZmJ'}
-    return render_template('auth/index.html', user=user)
+    form = UsernameForm()
+    if form.validate_on_submit():
+        old_name = session.get('name')
+        if old_name is None and old_name != form.username.data:
+            flash('提交成功！')
+        session['name'] = form.username.data
+        return redirect(url_for('index'))
+    return render_template('auth/index.html', name=session.get('name'), form=form)
 
 
 @app.route('/user')
