@@ -1,5 +1,5 @@
 # 🐶📚
 
-## TODO 
-
-- 1. 写个pylint 与 flake8 的脚本
+0. export FLASK_APP='run.py'
+1. flask db upgrade
+2. flask run

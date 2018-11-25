@@ -1,29 +1,32 @@
-import os
-
 from flask import Flask
 
 from flask_bootstrap import Bootstrap
+from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-
-app = Flask(__name__)
-
-app.config['SECRET_KEY'] = 'this is my secret_key for ZmJ'  # 防止表单csrf设置的密钥/防止环境变量中
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir, 'data.sqlite')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True  # 不需要跟踪对象变化从而降低内存消耗
-
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-
-bootstrap = Bootstrap(app)
-moment = Moment(app)
-
-from src import form, models  # 貌似需要这句话不然migrate 找不到对象
+from config import config
 
 
-@app.shell_context_processor
-def make_shell_context():
-    return dict(db=db, User=models.User, Role=models.Role)
+db = SQLAlchemy()
+migrate = Migrate()
+bootstrap = Bootstrap()
+moment = Moment()
+mail = Mail()
+
+
+def create_app(config_name):
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
+    config[config_name].init_app(app)
+
+    bootstrap.init_app(app)
+    migrate.init_app(app)
+    moment.init_app(app)
+    db.init_app(app)
+
+    from src.main import app as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+    return app
