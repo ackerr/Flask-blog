@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "34581277e05691657f17903005a58b184b4e30441900c381a80f92f558c43a9b"
+            "sha256": "9b53c5a5e8d1ee0d09948a00b2745fca532f8dc24122a78d1478e743da45fc29"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -61,6 +61,13 @@
             ],
             "index": "douban",
             "version": "==3.3.7.1"
+        },
+        "flask-login": {
+            "hashes": [
+                "sha256:c815c1ac7b3e35e2081685e389a665f2c74d7e077cb93cecabaea352da4752ec"
+            ],
+            "index": "douban",
+            "version": "==0.4.1"
         },
         "flask-mail": {
             "hashes": [

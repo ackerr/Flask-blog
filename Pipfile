@@ -8,8 +8,6 @@ name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
 
-
-
 [dev-packages]
 flake8 = "==3.5.0"
 flake8-commas = "==2.0.0"
@@ -26,6 +24,7 @@ flask-moment = "==0.6.0"
 flask-sqlalchemy = "==2.3.2"
 flask-wtf = "==0.14.2"
 flask-mail = "==0.9.1"
+flask-login = "==0.4.1"
 
 [requires]
 python_version = "3.6"
